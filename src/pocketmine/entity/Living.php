@@ -188,9 +188,15 @@ abstract class Living extends Entity implements Damageable{
 	}
 
 	public function hasLineOfSight(Entity $entity) : bool{
-		//TODO: head height
-		return true;
-		//return $this->getLevelNonNull()->rayTraceBlocks(Vector3::createVector($this->x, $this->y + $this->height, $this->z), Vector3::createVector($entity->x, $entity->y + $entity->height, $entity->z)) === null;
+		$blocks = [];
+		$nextIndex = 0;
+
+		foreach(VoxelRayTrace::inDirection($this->add(0, $this->eyeHeight, 0), $this->getDirectionVector(), 120) as $vector3){
+			$block = $this->level->getBlockAt($vector3->x, $vector3->y, $vector3->z);
+			if(!$block->canPassThrough() && $block->isSolid()) $blocks[$nextIndex++] = $block;
+		}
+
+		return count($blocks) === 0;
 	}
 
 	/**
