@@ -865,7 +865,7 @@ abstract class Living extends Entity implements Damageable{
 	 */
 	public function lookAt(Vector3 $target) : void{
 		$horizontal = sqrt(($target->x - $this->x) ** 2 + ($target->z - $this->z) ** 2);
-		$vertical = $target->y - $this->y;
+		$vertical = ($target->y + $target->eyeHeight) - ($this->y + $this->eyeHeight);
 		$this->pitch = -atan2($vertical, $horizontal) / M_PI * 180; //negative is up, positive is down
 
 		$xDist = $target->x - $this->x;
