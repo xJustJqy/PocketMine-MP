@@ -300,6 +300,10 @@ abstract class TextFormat{
 					$pointer->color = "white";
 					$color = "white";
 					break;
+				case TextFormat::MINECOIN_GOLD:
+					$pointer->color = "minecoin_gold";
+					$color = "minecoin_gold";
+					break;
 				default:
 					$pointer->text = $token;
 					break;
@@ -424,6 +428,9 @@ abstract class TextFormat{
 					$newString .= "<span style=color:#FFF>";
 					++$tokens;
 					break;
+				case TextFormat::MINECOIN_GOLD:
+					$newString .= "<span style=color:#DDD605";
+					++$tokens;
 				default:
 					$newString .= $token;
 					break;
